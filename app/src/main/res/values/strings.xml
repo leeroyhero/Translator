@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Translator</string>
+    <string name="title_new">Новое</string>
+    <string name="title_list">Список</string>
+    <string name="title_learn">Учить</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="yan_key">trnsl.1.1.20180116T152951Z.81e4e6702629a614.634296d4d049b0023fd495295caf9f8bfd4260e9</string>
+</resources>
