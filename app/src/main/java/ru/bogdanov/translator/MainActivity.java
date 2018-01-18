@@ -11,6 +11,7 @@ import android.widget.TextView;
 import ru.bogdanov.translator.Fragments.LearnFragment;
 import ru.bogdanov.translator.Fragments.ListFragment;
 import ru.bogdanov.translator.Fragments.NewFragment;
+import ru.bogdanov.translator.Fragments.OtherFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_learn:
                     viewPager.setCurrentItem(2);
+                    return true;
+                case R.id.navigation_other:
+                    viewPager.setCurrentItem(3);
                     return true;
             }
             return false;
@@ -56,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(new NewFragment());
         adapter.addFragment(new ListFragment());
         adapter.addFragment(new LearnFragment());
+        adapter.addFragment(new OtherFragment());
 
         viewPager.setAdapter(adapter);
 
@@ -76,6 +81,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case 2:
                         bottomNavigationView.setSelectedItemId(R.id.navigation_learn);
+                        break;
+                    case 3:
+                        bottomNavigationView.setSelectedItemId(R.id.navigation_other);
                         break;
                 }
             }

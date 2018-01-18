@@ -23,9 +23,9 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:text="Сохранить"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewTranslate"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewVerb"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textViewTranslate" />
+        app:layout_constraintTop_toTopOf="@+id/textViewVerb" />
 
     <EditText
         android:id="@+id/editText"
@@ -43,7 +43,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewTranslate"
+        android:id="@+id/textViewVerb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"

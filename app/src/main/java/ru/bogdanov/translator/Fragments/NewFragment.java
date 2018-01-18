@@ -56,7 +56,7 @@ String english, russian;
                 buttonTranslateClicked();
             }
         });
-        textView=getActivity().findViewById(R.id.textViewTranslate);
+        textView=getActivity().findViewById(R.id.textViewVerb);
     }
 
     private void buttonTranslateClicked() {
