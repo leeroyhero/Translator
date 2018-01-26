@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -23,7 +24,10 @@ import ru.bogdanov.translator.R;
 public class OtherFragment extends Fragment {
 TextView  textViewTranslate, textViewGroup, textViewVerb;
 Button buttonGerung, buttonInfinitive, buttonBothNotChange, buttonBothChange;
-ArrayList<Verb> list;
+ArrayList<Verb> list, thatList, list1, list2, tempList;
+Button buttonList1, buttonList2, buttonListAll;
+
+String TAG="other";
 
     public OtherFragment() {
         // Required empty public constructor
@@ -64,13 +68,41 @@ ArrayList<Verb> list;
         buttonBothChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buttonAnswerClicked(3);
+                buttonAnswerClicked(4);
             }
         });
         buttonBothNotChange.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buttonAnswerClicked(4);
+                buttonAnswerClicked(3);
+            }
+        });
+
+        buttonList1=getActivity().findViewById(R.id.buttonList1);
+        buttonList2=getActivity().findViewById(R.id.buttonList2);
+        buttonListAll=getActivity().findViewById(R.id.buttonListAll);
+        buttonList1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                thatList=new ArrayList<>(list1);
+                Toast.makeText(getActivity(), "Лист 1 загружен", Toast.LENGTH_SHORT).show();
+                tempList=new ArrayList<>(thatList);
+            }
+        });
+        buttonList2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                thatList=new ArrayList<>(list2);
+                Toast.makeText(getActivity(), "Лист 2 загружен", Toast.LENGTH_SHORT).show();
+                tempList=new ArrayList<>(thatList);
+            }
+        });
+        buttonListAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                thatList=new ArrayList<>(list);
+                Toast.makeText(getActivity(), "Весь список", Toast.LENGTH_SHORT).show();
+                tempList=new ArrayList<>(thatList);
             }
         });
 
@@ -81,7 +113,11 @@ ArrayList<Verb> list;
     void buttonAnswerClicked(int group){
         if (thatVerb==null){
             textViewGroup.setBackgroundColor(Color.TRANSPARENT);
-            thatVerb=list.get(new Random().nextInt(list.size()));
+            thatVerb=tempList.get(new Random().nextInt(tempList.size()));
+
+            tempList.remove(thatVerb);
+            if (tempList.isEmpty()) tempList=new ArrayList<>(thatList);
+
             textViewTranslate.setText(thatVerb.getTranslate());
 
             textViewGroup.setText("----------");
@@ -185,6 +221,18 @@ ArrayList<Verb> list;
         list.add(new Verb("go on","продолжать", 4));
         list.add(new Verb("need","нуждаться", 4));
 
+        thatList=new ArrayList<>(list);
+        list1=new ArrayList<>(list);
+        list2=new ArrayList<>();
+
+        while (list2.size()<list1.size()){
+            Verb verb=list1.get(new Random().nextInt(list1.size()));
+            list2.add(verb);
+            list1.remove(verb);
+        }
+
+        Log.d(TAG, "list size "+list.size()+" list1 size "+list1.size()+" list2 size "+list2.size());
+        tempList=new ArrayList<>(thatList);
     }
 
 

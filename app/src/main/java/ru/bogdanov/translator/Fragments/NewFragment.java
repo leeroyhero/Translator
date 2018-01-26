@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -23,9 +22,7 @@ import ru.bogdanov.translator.TranslateAPI;
  * A simple {@link Fragment} subclass.
  */
 public class NewFragment extends Fragment {
-EditText editText;
-TextView textView;
-String english, russian;
+EditText editText, editTextVerb;
 
 
     public NewFragment() {
@@ -56,26 +53,30 @@ String english, russian;
                 buttonTranslateClicked();
             }
         });
-        textView=getActivity().findViewById(R.id.textViewVerb);
+        editTextVerb=getActivity().findViewById(R.id.editTextVerb);
     }
 
     private void buttonTranslateClicked() {
         String word=editText.getText().toString();
         word=word.trim();
         if (!word.equals("")){
-            editText.setText("");
+
             translate(word);
         }
     }
 
     private void buttonSaveClicked() {
+        String russian=editTextVerb.getText().toString();
+                String english=editText.getText().toString();
+                editTextVerb.setText("");
+                editText.setText("");
         new FirestoreHelper().sendPair(new Pair(russian, english));
         Toast.makeText(getActivity(),"Сохранено "+english+" - "+russian, Toast.LENGTH_SHORT).show();
     }
 
 
     void translate(String word){
-        english=word;
+
         new AsyncTranslate().execute(word);
     }
 
@@ -96,8 +97,8 @@ String english, russian;
         @Override
         protected void onPostExecute(Object o) {
             super.onPostExecute(o);
-            russian=o.toString();
-            textView.setText(o.toString());
+
+            editTextVerb.setText(o.toString());
         }
     }
 
