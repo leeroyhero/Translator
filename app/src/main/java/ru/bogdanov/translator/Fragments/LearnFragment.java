@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +27,7 @@ String TAG="lea_fr";
 Button buttonClick;
 TextView textView1,textView2;
 ArrayList<Pair> list;
+Switch switchRussian;
 
     public LearnFragment() {
         // Required empty public constructor
@@ -54,6 +56,8 @@ ArrayList<Pair> list;
         textView1=getActivity().findViewById(R.id.textViewWord1);
         textView2=getActivity().findViewById(R.id.textViewWord2);
 
+        switchRussian=getActivity().findViewById(R.id.switchRussian);
+
         buttonClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,7 +75,10 @@ ArrayList<Pair> list;
             buttonClick.setText("Показать");
 
             currentPair=list.get(new Random().nextInt(list.size()));
+            isRussianFirst=true;
+            if (!switchRussian.isChecked())
             isRussianFirst=new Random().nextBoolean();
+
             textView2.setText("---------");
             if (isRussianFirst) textView1.setText(currentPair.getRussian());
             else textView1.setText(currentPair.getEnglish());
